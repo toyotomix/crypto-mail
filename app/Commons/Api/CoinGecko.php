@@ -71,10 +71,11 @@ class CoinGecko {
     /**
      * マーケット情報取得
      * 
-     * @param int ページ番号
+     * @param int $per_page 1ページあたりの表示数
+     * @param int $page ページ番号
      * @return Obj
      */
-    public static function fetchMarkets($page)
+    public static function fetchMarkets($per_page, $page)
     {
         // path
         $path = 'coins/markets';
@@ -87,7 +88,7 @@ class CoinGecko {
                 'query' => [
                     'vs_currency' => 'jpy',
                     'order' => 'market_cap_desc',
-                    'per_page' => '100',
+                    'per_page' => (string) $per_page,
                     'page' => (string) $page,
                     'sparkline' => 'false',
                 ]
