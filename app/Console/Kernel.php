@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\CoinsUpdate::class,    // コインテーブル更新
+        Commands\PricesUpdate::class,   // 価格テーブル更新
     ];
 
     /**
@@ -26,6 +27,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        
+        
+        // 毎分コインテーブルを更新
+        $schedule->command('command:coins-update')->everyMinute();
     }
 
     /**

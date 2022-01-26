@@ -14,18 +14,18 @@ class CreateCoinsTablel extends Migration
     public function up()
     {
         Schema::create('coins', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('gecko_id');
-            $table->string('name');
-            $table->string('image', 2048);
-            $table->double('current_price');
-            $table->bigInteger('market_cap');
-            $table->integer('market_cap_rank');
-            $table->double('price_change_percentage_24h');
-            $table->double('high_24h');
-            $table->double('low_24h');
-            $table->double('ath');
-            $table->double('atl');
+            $table->bigIncrements('id');                    // id
+            $table->string('gecko_id');                     // CoinGeckoの通貨id
+            $table->string('name');                         // 通貨名
+            $table->string('image', 2048);                  // サムネイルURL
+            $table->double('current_price');                // 現在価格
+            $table->bigInteger('market_cap');               // 市場価格
+            $table->integer('market_cap_rank');             // 市場価格ランク
+            $table->double('price_change_percentage_24h');  // 価格変動率(24h)
+            $table->double('high_24h');                     // 24h最高値
+            $table->double('low_24h');                      // 24h最安値
+            $table->double('ath');                          // 過去最高値
+            $table->double('atl');                          // 過去最低値
             $table->timestamps();
         });
     }

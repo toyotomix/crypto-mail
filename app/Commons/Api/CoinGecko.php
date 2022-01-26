@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 
 class CoinGecko {
     
-    // base url
+    // base uri
     private static $base_uri = 'https://api.coingecko.com/api/v3/';
 
     /**
@@ -29,8 +29,7 @@ class CoinGecko {
             return json_decode($response->getBody(), true);
             
         } catch (ClientException $e) {
-            echo Psr7\str($e->getRequest());
-            echo Psr7\str($e->getResponse());
+            echo $e->getMessage();
         }
     }
     
@@ -63,8 +62,7 @@ class CoinGecko {
             return json_decode($response->getBody(), true);
             
         } catch (ClientException $e) {
-            echo Psr7\str($e->getRequest());
-            echo Psr7\str($e->getResponse());
+            echo $e->getMessage();
         }
     }
     
@@ -98,8 +96,7 @@ class CoinGecko {
             return json_decode($response->getBody(), true);
             
         } catch (ClientException $e) {
-            echo Psr7\str($e->getRequest());
-            echo Psr7\str($e->getResponse());
+            echo $e->getMessage();
         }
     }
 }

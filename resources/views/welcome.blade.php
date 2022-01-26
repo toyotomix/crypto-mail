@@ -8,5 +8,5 @@
             
         <!--</div>-->
     @endif
-    @include('coins.coins')
+    @include('coins.index')
 @endsection

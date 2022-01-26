@@ -9,36 +9,30 @@ use App\Commons\Api\CoinGecko;
 
 class CoinsController extends Controller
 {
+    // index
     public function index()
     {
-        //$coins = Coin::orderBy('market_cap', 'desc')->take(1000)->paginate(100);
-        // $coins = Coin::orderBy('market_cap_rank', 'asc')->limit(1000)->paginate(100);
-        
-        // $coins = Coin::orderBy('market_cap_rank', 'asc')->take(1000)->get();
-        // $coins = new LengthAwarePaginator($coins->all(), $coins->count(), 100);
-        
+        // 時価総額ランクの上位1000件を取得
         $coins = Coin::orderBy('market_cap_rank', 'asc')->take(1000)->get();
-        $coins = $coins->paginate(100); // マクロを使う
+        // ページネーション（マクロを使う）
+        $coins = $coins->paginate(100);
         
+        // 認証済みの場合
         if (\Auth::check()) {
-            // 認証済みの場合
-            
             // 認証済みユーザを取得
             $user = \Auth::user();
-            
-            // （後のChapterで他ユーザの投稿も取得するように変更しますが、現時点ではこのユーザの投稿のみ取得します）
-            // $microposts = $user->microposts()->orderBy('created_at', 'desc')->paginate(10);
-
-            $data = [
-                'user' => $user,
-                'coins' => $coins,
-            ];
-            
             // Welcomeビューでそれらを表示
-            return view('welcome', $data);
+            return view('welcome', ['user' => $user, 'coins' => $coins]);
         }
         
         // 通貨リストのみビューに渡す
         return view('welcome', ['coins' => $coins]);
+    }
+    
+    // show
+    public function show($gecko_id)
+    {
+        $coin = Coin::where('gecko_id', '=', $gecko_id)->first();
+        return view('coins.show', ['coin' => $coin]);
     }
 }

@@ -13,7 +13,7 @@ class CoinsUpdate extends Command
      *
      * @var string
      */
-    protected $signature = 'command:coinsUpdate';
+    protected $signature = 'command:coins-update';
 
     /**
      * The console command description.
@@ -66,10 +66,10 @@ class CoinsUpdate extends Command
                                 'ath' => (float) $data['ath'],
                                 'atl' => (float) $data['atl'],
                             ]);
-                        echo 'Succesfull update of '. '"' . $data['id'] . '"' . PHP_EOL;
+                        echo '[coins-update] Succesfull update of '. '"' . $data['id'] . '"' . PHP_EOL;
                         continue;
                     }
-                
+                    
                     // 新規
                     $coin->gecko_id = $data['id'];
                     $coin->name = $data['name'];
@@ -84,11 +84,11 @@ class CoinsUpdate extends Command
                     $coin->atl = (float) $data['atl'];
                     
                     if($coin->save()) {
-                        echo 'Succesfull save of ' . '"' . $data['id'] . '"' . PHP_EOL;
+                        echo '[coins-update] Succesfull save of ' . '"' . $data['id'] . '"' . PHP_EOL;
                     }
                 }
                 
-                // 1250件で終了
+                // 1250件(250 x 5) で終了
                 if($count == 5) {
                     // ループ抜ける
                     break;
@@ -98,7 +98,7 @@ class CoinsUpdate extends Command
                 $count++;
                 
             } catch (Exception $e) {
-                print_r($e);
+                echo $e->getMessage();
                 break;
             }
         }
