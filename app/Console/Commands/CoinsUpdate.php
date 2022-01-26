@@ -66,6 +66,7 @@ class CoinsUpdate extends Command
                                 'ath' => (float) $data['ath'],
                                 'atl' => (float) $data['atl'],
                             ]);
+                        // コンソール出力
                         echo '[coins-update] Succesfull update of '. '"' . $data['id'] . '"' . PHP_EOL;
                         continue;
                     }
@@ -84,13 +85,13 @@ class CoinsUpdate extends Command
                     $coin->atl = (float) $data['atl'];
                     
                     if($coin->save()) {
+                        // コンソール出力
                         echo '[coins-update] Succesfull save of ' . '"' . $data['id'] . '"' . PHP_EOL;
                     }
                 }
                 
-                // 1250件(250 x 5) で終了
                 if($count == 5) {
-                    // ループ抜ける
+                    // 1250件(250 x 5)で終了
                     break;
                 }
                 

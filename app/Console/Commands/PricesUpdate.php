@@ -55,12 +55,12 @@ class PricesUpdate extends Command
                     }
                     // 価格レコード作成
                     $coin->prices()->create(['price' => $data['current_price'] ]);
+                    // コンソール出力
                     echo '[prices-update] Succesfull save of ' . '"' . $data['id'] . '"' . ' price' . PHP_EOL;
                 }
                 
-                // 1250件(250 x 5) で終了
                 if($count == 5) {
-                    // ループ抜ける
+                    // 1250件(250 x 5)で終了
                     break;
                 }
                 

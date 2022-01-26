@@ -17,7 +17,7 @@ class CoinsController extends Controller
         // ページネーション（マクロを使う）
         $coins = $coins->paginate(100);
         
-        // 認証済みの場合
+        // 認証済み
         if (\Auth::check()) {
             // 認証済みユーザを取得
             $user = \Auth::user();
