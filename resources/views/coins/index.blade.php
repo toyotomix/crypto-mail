@@ -32,7 +32,7 @@
                         </div>
                         {{-- 現在の価格 --}}
                         <div class="col-md-2 text-right">
-                            &yen;{{ number_format($coin->current_price) }}
+                            &yen;{{ preg_replace("/\.?0+$/", "", number_format($coin->current_price, 10)) }}
                         </div>
                         {{-- 価格変動率（24h） --}}
                         @if ($coin->price_change_percentage_24h < 0)

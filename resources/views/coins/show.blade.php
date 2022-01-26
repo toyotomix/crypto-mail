@@ -1,16 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="text-fontweight-bold">
-        {{ $coin->name }}
+    <div class="d-flex align-items-center mb-3">
+        <div class="mr-2">
+            {{-- アイコン --}}
+            <img src="{{ $coin->image }}" alt="" width="30" height="30">
+        </div>
+        <div>
+            {{-- 通貨名 --}}
+            <h3 class="mb-0">{{ $coin->name }}</h3>
+        </div>
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 text-right">
-                <img class="rounded" src="{{ $coin->image }}" alt="" width="150" height="150">
+            {{-- TODO : チャートグラフ --}}
+            <div class="col-md-6">
+                @include('coins.chart')
             </div>
-            <div class="col-md-6 text-left">
-                
+            {{-- 通貨詳細テーブル --}}
+            <div class="col-md-6">
+                @include('coins.table')
             </div>
         </div>
     </div>

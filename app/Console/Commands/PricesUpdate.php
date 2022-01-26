@@ -54,7 +54,7 @@ class PricesUpdate extends Command
                         continue;
                     }
                     // 価格レコード作成
-                    $coin->prices()->create(['price' => $data['current_price'] ]);
+                    $coin->prices()->create(['price' => (float) $data['current_price'] ]);
                     // コンソール出力
                     echo '[prices-update] Succesfull save of ' . '"' . $data['id'] . '"' . ' price' . PHP_EOL;
                 }

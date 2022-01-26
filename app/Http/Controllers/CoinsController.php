@@ -32,7 +32,10 @@ class CoinsController extends Controller
     // show
     public function show($gecko_id)
     {
+        // 通貨情報を取得
         $coin = Coin::where('gecko_id', '=', $gecko_id)->first();
-        return view('coins.show', ['coin' => $coin]);
+        // チャート用の価格を取得
+        $prices = $coin->prices()->get();
+        return view('coins.show', ['coin' => $coin, 'prices' => $prices]);
     }
 }
