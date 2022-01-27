@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="d-flex align-items-center mb-3">
+        {{-- アイコン --}}
         <div class="mr-2">
-            {{-- アイコン --}}
             <img src="{{ $coin->image }}" alt="" width="30" height="30">
         </div>
+        {{-- 通貨名 --}}
         <div>
-            {{-- 通貨名 --}}
             <h3 class="mb-0">{{ $coin->name }}</h3>
         </div>
     </div>

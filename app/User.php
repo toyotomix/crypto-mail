@@ -36,4 +36,65 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    /**
+     * このユーザがアラート対象にしている通貨
+     */
+    public function alert_coins()
+    {
+        return $this->belongsToMany(Coin::class, 'alerts', 'user_id', 'coin_id')->withTimestamps();
+    }
+    
+    /**
+     * アラート登録する
+     * 
+     * @param $coinId 通貨id
+     * @return bool
+     */
+    public function alert($coinId)
+    {
+        // すでにアラート登録済みか
+        $exist = $this->is_alerts($coinId);
+
+        if($exist) {
+            // アラート登録済み
+            return false;
+        }
+        
+        // アラート登録
+        $this->alert_coins()->attach($coinId);
+        return true;
+    }
+    
+    /**
+     * アラート解除する
+     * 
+     * @param $coinId 通貨id
+     * @return bool
+     */
+    public function unalert($coinId)
+    {
+        // すでにアラート登録済みか
+        $exist = $this->is_alerts($coinId);
+        
+        if (!$exist) {
+            // 存在しない
+            return false;
+        }
+        
+        // アラート解除
+        $this->alert_coins()->detach($coinId);
+        return true;
+    }
+    
+    /**
+     * 指定の通貨が既にアラート登録済みか調べる
+     * 
+     * @param int $coinId
+     * @return bool 登録済：true 未登録：false
+     */ 
+    public function is_alerts($coinId)
+    {
+        return $this->alert_coins()->where('coin_id', $coinId)->exists();
+    }
 }

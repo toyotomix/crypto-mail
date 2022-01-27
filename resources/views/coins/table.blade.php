@@ -1,4 +1,4 @@
-<table class="table table-secondary">
+<table class="table table-secondary rounded">
     <tbody class="font-weight-bold">
         <tr>
             <td>時価総額ランク</td>

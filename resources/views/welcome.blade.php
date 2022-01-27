@@ -8,5 +8,6 @@
             
         <!--</div>-->
     @endif
+    @include('commons.nav')
     @include('coins.index')
 @endsection
