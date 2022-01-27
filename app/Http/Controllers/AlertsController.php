@@ -14,7 +14,7 @@ class AlertsController extends Controller
         // 認証済みユーザを取得
         $user = \Auth::user();
         // ユーザがアラート登録している通貨を取得
-        $coins = $user->alert_coins()->get();
+        $coins = $user->alert_coins()->orderBy('market_cap_rank', 'asc')->get();
         // ページネーション（マクロを使う）
         $coins = $coins->paginate(100);
         // 通貨リストのみビューに渡す
