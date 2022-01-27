@@ -13,14 +13,18 @@
     </div>
     <div class="container">
         <div class="row">
-            {{-- TODO : チャートグラフ --}}
-            <div class="col-md-6">
+            {{-- チャートグラフ --}}
+            <div class="col-md-7">
                 @include('coins.chart')
             </div>
             {{-- 通貨詳細テーブル --}}
-            <div class="col-md-6">
+            <div class="col-md-5">
                 @include('coins.table')
             </div>
         </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        {{-- ページネーションのリンク --}}
+        @include('alerts.alerts_button')
     </div>
 @endsection

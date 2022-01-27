@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use App\Coin;
 use App\Commons\Api\CoinGecko;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AlertsController extends Controller
 {
@@ -18,16 +18,30 @@ class AlertsController extends Controller
         // ページネーション（マクロを使う）
         $coins = $coins->paginate(100);
         // 通貨リストのみビューに渡す
-        return view('welcome', ['coins' => $coins]);
+        return view('index', ['coins' => $coins]);
     }
     
-    public function store()
+    /**
+     * アラートを登録するアクション。
+     *
+     * @param  $coinId 通貨id
+     * @return \Illuminate\Http\Response
+     */
+    public function store($coinId)
     {
-        
+        \Auth::user()->alert($coinId);
+        return back();
     }
     
-    public function destroy()
+    /**
+     * アラートを解除するアクション。
+     *
+     * @param  $coinId 通貨id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($coinId)
     {
-        
+        \Auth::user()->unalert($coinId);
+        return back();
     }
 }

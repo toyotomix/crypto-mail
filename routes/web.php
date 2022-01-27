@@ -12,7 +12,6 @@
 */
 
 Route::get('/', 'CoinsController@index');
-
 Route::get('/coins/{id}', 'CoinsController@show')->name('coins.show');
 
 // ユーザ登録
@@ -26,6 +25,11 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    
+    Route::group(['prefix' => 'alerts/{id}'], function () {
+        Route::post('alert', 'AlertsController@store')->name('alerts.alert');
+        Route::delete('unalert', 'AlertsController@destroy')->name('alerts.unalert');
+    });
     
     // アラート
     Route::get('alerts', 'AlertsController@index')->name('alerts');
