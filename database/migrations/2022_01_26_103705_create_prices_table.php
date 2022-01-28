@@ -17,6 +17,7 @@ class CreatePricesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('coin_id');
             $table->double('price');
+            $table->timestamp('priced_at');
             $table->timestamps();
             
             // 外部キー制約

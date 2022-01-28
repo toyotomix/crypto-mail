@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Coin;
-use App\Commons\Api\CoinGecko;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 

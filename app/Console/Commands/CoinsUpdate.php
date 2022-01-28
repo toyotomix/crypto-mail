@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Commons\Api\CoinGecko;
 use App\Coin;
+use App\Lib\Api\CoinGecko;
+use Illuminate\Console\Command;
 
 class CoinsUpdate extends Command
 {

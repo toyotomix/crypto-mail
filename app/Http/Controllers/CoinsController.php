@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Coin;
-use App\Commons\Api\CoinGecko;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -35,13 +35,27 @@ class CoinsController extends Controller
         // 通貨情報を取得
         $coin = Coin::where('gecko_id', '=', $gecko_id)->first();
         
-        // 'created_at'が24時間以内のデータに絞り込む
+        // 'priced_at'が24時間以内のデータに絞り込む
         $prices = $coin
             ->prices()
-            ->orderBy('created_at','desc')
-            ->whereRaw('created_at > NOW() - INTERVAL 1 DAY')
+            ->orderBy('priced_at','asc')
+            ->whereRaw('priced_at > NOW() - INTERVAL 1 DAY')
             ->get();
-            
-        return view('coins.show', ['coin' => $coin, 'prices' => $prices]);
+        
+        // チャートデータ
+        $chart = [
+            'labels' => [],
+            'data' => []
+        ];
+        
+        foreach ($prices as $price) {
+            $priced_at = new DateTime($price->priced_at);
+            array_push($chart['labels'], $priced_at->format('H:i'));    // チャート用の日時フォーマットに変換
+            array_push($chart['data'], $price->price);
+        }
+        
+        dump($chart);
+        
+        return view('coins.show', ['coin' => $coin, 'chartData' => $chart]);
     }
 }

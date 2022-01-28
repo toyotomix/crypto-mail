@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Price extends Model
 {
-    protected $fillable = ['price'];
+    protected $fillable = ['price', 'priced_at'];
     
     /**
      * この価格に紐づく通貨

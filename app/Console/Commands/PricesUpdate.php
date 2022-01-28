@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Commons\Api\CoinGecko;
 use App\Coin;
+use App\Lib\Api\CoinGecko;
+use DateTime;
+use DateTimeZone;
+use Illuminate\Console\Command;
 
 class PricesUpdate extends Command
 {
@@ -53,8 +55,16 @@ class PricesUpdate extends Command
                     if($coin == null) {
                         continue;
                     }
+                    
+                    // 価格時点の日時をJSTに変換
+                    $priced_at = new DateTime($data['last_updated']);
+                    $jst = $priced_at->setTimeZone(new DateTimeZone('Asia/Tokyo'))->format('Y-m-d H:i:s');
+                    
                     // 価格レコード作成
-                    $coin->prices()->create(['price' => (float) $data['current_price'] ]);
+                    $coin->prices()->create([
+                        'price' => (float) $data['current_price'],
+                        'priced_at' => $jst,
+                    ]);
                     // コンソール出力
                     echo '[prices-update] Succesfull save of ' . '"' . $data['id'] . '"' . ' price' . PHP_EOL;
                 }
