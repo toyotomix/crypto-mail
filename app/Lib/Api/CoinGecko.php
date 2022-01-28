@@ -6,9 +6,6 @@ use GuzzleHttp\Client;
 
 class CoinGecko {
     
-    // base uri
-    private static $base_uri = 'https://api.coingecko.com/api/v3/';
-
     /**
      * 通貨リスト取得
      * 
@@ -20,7 +17,7 @@ class CoinGecko {
         $path = 'coins/list';
         try {
             // GuzzleHttp Client作成
-            $client = new Client(['base_uri' => self::$base_uri]);
+            $client = new Client(['base_uri' => config('coingecko.api.base_uri')]);
             
             // リクエスト
             $response = $client->request('GET', $path);
@@ -45,7 +42,7 @@ class CoinGecko {
         $path = 'coins/' . $id;
         try {
             // GuzzleHttp Client作成
-            $client = new Client(['base_uri' => self::$base_uri]);
+            $client = new Client(['base_uri' => config('coingecko.api.base_uri')]);
             
             // リクエスト
             $response = $client->request('GET', $path, [
@@ -79,7 +76,7 @@ class CoinGecko {
         $path = 'coins/markets';
         try {
             // GuzzleHttp Client作成
-            $client = new Client(['base_uri' => self::$base_uri]);
+            $client = new Client(['base_uri' => config('coingecko.api.base_uri')]);
             
             // リクエスト
             $response = $client->request('GET', $path, [

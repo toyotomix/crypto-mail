@@ -9,7 +9,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class CoinsController extends Controller
 {
-    // index
+    /**
+     * トップページを表示する
+     * 
+     * @return view
+     */
     public function index()
     {
         // 時価総額ランクの上位1000件を取得
@@ -29,13 +33,18 @@ class CoinsController extends Controller
         return view('index', ['coins' => $coins]);
     }
     
-    // show
+    /**
+     * 通貨詳細を表示する
+     * 
+     * @param $gecko_id CoinGeckoの通貨id
+     * @return view
+     */
     public function show($gecko_id)
     {
-        // 通貨情報を取得
+        // gecko_idが一致する通貨を取得
         $coin = Coin::where('gecko_id', '=', $gecko_id)->first();
         
-        // 'priced_at'が24時間以内のデータに絞り込む
+        // 通貨に紐づく24時間以内の価格を取得
         $prices = $coin
             ->prices()
             ->orderBy('priced_at','asc')
@@ -48,14 +57,14 @@ class CoinsController extends Controller
             'data' => []
         ];
         
+        // chart.js用に整形
         foreach ($prices as $price) {
-            $priced_at = new DateTime($price->priced_at);
-            array_push($chart['labels'], $priced_at->format('H:i'));    // チャート用の日時フォーマットに変換
+            // $priced_at = new DateTime($price->priced_at);
+            // array_push($chart['labels'], $priced_at->format('H:i'));
+            array_push($chart['labels'], $price->priced_at);
             array_push($chart['data'], $price->price);
         }
-        
-        dump($chart);
-        
+
         return view('coins.show', ['coin' => $coin, 'chartData' => $chart]);
     }
 }
