@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Coin;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -48,7 +49,7 @@ class CoinsController extends Controller
         $prices = $coin
             ->prices()
             ->orderBy('priced_at','asc')
-            ->whereRaw('priced_at > NOW() - INTERVAL 1 DAY')
+            // ->whereRaw('priced_at > NOW() - INTERVAL 1 DAY')     // Herokuでエラー出る
             ->get();
         
         // チャートデータ
@@ -57,16 +58,18 @@ class CoinsController extends Controller
             'data' => []
         ];
         
-        // chart.js用に整形
         foreach ($prices as $price) {
-            // $priced_at = new DateTime($price->priced_at);
-            // array_push($chart['labels'], $priced_at->format('H:i'));
-            array_push($chart['labels'], $price->priced_at);
-            array_push($chart['data'], $price->price);
+            $now = Carbon::now();
+            $yesterday = Carbon::yesterday();
+            $time = Carbon::parse($price->priced_at);
+            
+            // 24時間以内のデータのみチャートに表示
+            if ($time->between($yesterday, $now)) {
+                array_push($chart['labels'], $price->priced_at);
+                array_push($chart['data'], $price->price);
+            }
         }
         
-        dump($chart);
-
         return view('coins.show', ['coin' => $coin, 'chartData' => $chart]);
     }
 }
