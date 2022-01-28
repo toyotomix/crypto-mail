@@ -13,7 +13,7 @@ export const chartOptions = {
         //ツールチップの設定
         tooltip: {
             intersect: true,
-            displayColors: false,   // グラフカラー表示
+            displayColors: false,   // グラフカラーの表示
             callbacks: {
                 label: function(context) {
                     let label = context.dataset.label || '';
@@ -21,7 +21,8 @@ export const chartOptions = {
                         label += ': ';
                     }
                     if (context.parsed.y !== null) {
-                        label += new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY'}).format(context.parsed.y);
+                        // label += new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY'}).format(context.parsed.y);
+                        label += '\xA5' + Number(context.parsed.y).toLocaleString();
                     }
                     return label;
                 }
@@ -51,7 +52,7 @@ export const chartOptions = {
         y: {
             ticks: {
                 callback: function(value, index, ticks) {
-                    return '\xA5' + value;
+                    return '\xA5' + Number(value).toLocaleString();
                     // return new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY'}).format(value);
                 }
             }

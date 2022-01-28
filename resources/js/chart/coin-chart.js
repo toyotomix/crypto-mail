@@ -10,7 +10,6 @@ const myChart = new Chart(ctx, {
     data: {
         labels: chartData.labels,
         datasets: [{
-            // label: 'My First Dataset',
             data: chartData.data,
             fill: false,
             borderColor: 'rgb(75, 192, 192)',

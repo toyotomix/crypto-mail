@@ -35121,7 +35121,7 @@ var chartOptions = {
     tooltip: {
       intersect: true,
       displayColors: false,
-      // グラフカラー表示
+      // グラフカラーの表示
       callbacks: {
         label: function label(context) {
           var label = context.dataset.label || '';
@@ -35131,10 +35131,8 @@ var chartOptions = {
           }
 
           if (context.parsed.y !== null) {
-            label += new Intl.NumberFormat('ja-JP', {
-              style: 'currency',
-              currency: 'JPY'
-            }).format(context.parsed.y);
+            // label += new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY'}).format(context.parsed.y);
+            label += '\xA5' + Number(context.parsed.y).toLocaleString();
           }
 
           return label;
@@ -35166,7 +35164,7 @@ var chartOptions = {
     y: {
       ticks: {
         callback: function callback(value, index, ticks) {
-          return '\xA5' + value; // return new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY'}).format(value);
+          return '\xA5' + Number(value).toLocaleString(); // return new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY'}).format(value);
         }
       }
     }
@@ -35197,7 +35195,6 @@ var myChart = new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__["default"](ctx, {
   data: {
     labels: chartData.labels,
     datasets: [{
-      // label: 'My First Dataset',
       data: chartData.data,
       fill: false,
       borderColor: 'rgb(75, 192, 192)',

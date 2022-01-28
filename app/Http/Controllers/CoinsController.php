@@ -64,6 +64,8 @@ class CoinsController extends Controller
             array_push($chart['labels'], $price->priced_at);
             array_push($chart['data'], $price->price);
         }
+        
+        dump($chart);
 
         return view('coins.show', ['coin' => $coin, 'chartData' => $chart]);
     }
