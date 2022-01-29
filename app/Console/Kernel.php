@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\CoinsUpdate::class,    // コインテーブル更新
         Commands\PricesUpdate::class,   // 価格テーブル更新
+        Commands\PricesDelete::class,   // 価格テーブル削除
     ];
 
     /**

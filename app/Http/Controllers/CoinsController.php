@@ -70,6 +70,8 @@ class CoinsController extends Controller
             }
         }
         
+        dump($chart);
+        
         return view('coins.show', ['coin' => $coin, 'chartData' => $chart]);
     }
 }
