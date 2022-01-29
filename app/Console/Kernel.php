@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         Commands\CoinsUpdate::class,    // コインテーブル更新
         Commands\PricesUpdate::class,   // 価格テーブル更新
         Commands\PricesDelete::class,   // 価格テーブル削除
+        Commands\BitcoinUpdate::class,  // ビットコイン更新（Heroku動作確認用）
     ];
 
     /**
