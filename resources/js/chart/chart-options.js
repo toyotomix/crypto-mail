@@ -43,7 +43,7 @@ export const chartOptions = {
             },
             time: {
                 unit: "hour",
-                stepSize: 3,
+                stepSize: 3,    // x軸 3時間きざみ
                 displayFormats: {
                     hour: "HH:mm"
                 }
