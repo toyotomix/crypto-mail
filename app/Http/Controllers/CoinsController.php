@@ -60,7 +60,8 @@ class CoinsController extends Controller
         
         foreach ($prices as $price) {
             $now = Carbon::now();
-            $yesterday = Carbon::yesterday();
+            $yesterday = clone $now;
+            $yesterday->subHours(24);
             $time = Carbon::parse($price->priced_at);
             
             // 24時間以内のデータのみチャートに表示
