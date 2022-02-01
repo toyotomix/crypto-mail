@@ -15,10 +15,12 @@
         <div class="row">
             {{-- チャートグラフ --}}
             <div class="col-md-7">
+                <h3 class="text-center">価格チャート(24H)</h3>
                 @include('coins.chart')
             </div>
             {{-- 通貨詳細テーブル --}}
             <div class="col-md-5">
+                <h3 class="text-center">情報</h3>
                 @include('coins.table')
             </div>
         </div>

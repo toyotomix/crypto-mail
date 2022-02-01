@@ -2,24 +2,30 @@
 
 namespace App\Mail;
 
-use App\Price;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class PriceMail extends Mailable
+class CurrentPrices extends Mailable
 {
     use Queueable, SerializesModels;
+
+    // コイン名称
+    protected $coin_name;
+
+    // 価格
+    protected $price;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($coin_name, $price)
     {
-        //
+        $this->coin_name = $coin_name;
+        $this->price = $price;
     }
 
     /**
@@ -29,13 +35,12 @@ class PriceMail extends Mailable
      */
     public function build()
     {
-        $prices = Price::all();
-        
         return $this->view('mails.mail')
             ->text('mails.mail')
-            ->subject('タイトル')
+            ->subject('CRYPTO MAIL 価格のお知らせ')
             ->with([
-                'text' => '本文',
+                'coin' => $this->coin_name,
+                'price' => $this->price,
             ]);
     }
 }
