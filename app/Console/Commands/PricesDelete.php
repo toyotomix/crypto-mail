@@ -45,12 +45,13 @@ class PricesDelete extends Command
         $prices = Price::all();
         foreach ($prices as $price) {
             try {
-                $time = Carbon::parse($price->priced_at);
-                $yesterday = clone $time;
+                $now = Carbon::now();
+                $yesterday = clone $now;
                 $yesterday->subHours(24);
+                $time = Carbon::parse($price->priced_at);
                 
                 // 24時間経過したデータを削除する
-                if ($time->lt($yesterday)) {
+                if ($time->lte($yesterday)) {
                     Price::destroy($price->id);
                     $count++;
                 }
