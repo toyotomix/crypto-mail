@@ -15,10 +15,18 @@ class Coin extends Model
      }
      
      /**
-     * この通貨をアラート対象にしているユーザ
+      * この通貨が対象となっている通知
+      */
+     public function alerts()
+     {
+         return $this->hasMany(Alert::class);
+     }
+     
+     /**
+     * この通貨を通知対象にしているユーザ
      */
-    public function alerts_users()
+    public function alert_users()
     {
-        return $this->belongsToMany(Coin::class, 'alerts', 'coin_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'alerts', 'coin_id', 'user_id')->withTimestamps();
     }
 }

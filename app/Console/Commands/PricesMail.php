@@ -48,19 +48,15 @@ class PricesMail extends Command
         }
         
         foreach ($users as $user) {
-            // ユーザに紐づく通知を取得
-            $alert_coins = $user->alert_coins();
-            if (count((Array) $alert_coins) == 0) {
-                // 通知情報なし
+            // ユーザが通知対象にしている通貨を取得
+            $coins = $user->alert_coins()->orderBy('market_cap_rank', 'asc')->get();
+            if (count((Array) $coins) == 0) {
                 continue;
             }
-            foreach ($alert_coins as $alert_coin) {
-                // 通貨情報を取得
-                $coin = Coin::find($alert_coin);
-                // メール送信
-                \Mail::to('tytmixx@gmail.com')->send(new CurrentPrices($coin->name, $coin->current_price));
-                echo '[prices-mail] sended to ' . $user->email . ', ' . $coin->name . ' price' . PHP_EOL;
-            }
+            
+            // メール送信
+            \Mail::to($user->email)->send(new CurrentPrices($coins));
+            echo '[prices-mail] sended to ' . $user->email . PHP_EOL;
         }
     }
 }

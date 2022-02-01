@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    {{-- ナビゲーション --}}
+    @include('commons.nav')
     <div class="d-flex align-items-center mb-3">
         {{-- アイコン --}}
         <div class="mr-2">
@@ -26,7 +28,9 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        {{-- ページネーションのリンク --}}
-        @include('alerts.alerts_button')
+        {{-- 配信登録／解除 --}}
+        <div class="mr-3">
+            @include('alerts.alerts_button')
+        </div>
     </div>
 @endsection

@@ -38,7 +38,15 @@ class User extends Authenticatable
     ];
     
     /**
-     * このユーザがアラート対象にしている通貨
+     * このユーザの通知情報
+     */
+    public function alerts()
+    {
+        return $this->hasMany(Alert::class);
+    }
+    
+    /**
+     * このユーザが通知対象にしている通貨
      */
     public function alert_coins()
     {

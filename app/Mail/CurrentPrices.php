@@ -11,21 +11,17 @@ class CurrentPrices extends Mailable
 {
     use Queueable, SerializesModels;
 
-    // コイン名称
-    protected $coin_name;
-
-    // 価格
-    protected $price;
+    // コイン
+    protected $coins;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($coin_name, $price)
+    public function __construct($coins)
     {
-        $this->coin_name = $coin_name;
-        $this->price = $price;
+        $this->coins = $coins;
     }
 
     /**
@@ -37,10 +33,9 @@ class CurrentPrices extends Mailable
     {
         return $this->view('mails.mail')
             ->text('mails.mail')
-            ->subject('CRYPTO MAIL 価格のお知らせ')
+            ->subject('暗号通貨 価格配信サービス')
             ->with([
-                'coin' => $this->coin_name,
-                'price' => $this->price,
+                'coins' => $this->coins,
             ]);
     }
 }

@@ -59,4 +59,12 @@
         {{-- ページネーションのリンク --}}
         {{ $coins->links() }}    
     </div>
+@else
+    <div class="center jumbotron">
+        <div class="text-center">
+            <h2 class="mb-3">メール配信する通貨を登録しましょう！</h2>
+            {{-- ユーザ登録ページへのリンク --}}
+            <a class="btn btn-lg btn-primary" href="/">通貨一覧</a>
+        </div>
+    </div>
 @endif
