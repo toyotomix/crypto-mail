@@ -30,9 +30,6 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         
-        
-        // 毎分コインテーブルを更新
-        $schedule->command('command:coins-update')->everyMinute();
     }
 
     /**
