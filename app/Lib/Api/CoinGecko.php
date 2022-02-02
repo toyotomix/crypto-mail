@@ -26,7 +26,7 @@ class CoinGecko {
             return json_decode($response->getBody(), true);
             
         } catch (ClientException $e) {
-            echo $e->getMessage();
+            throw $e;
         }
     }
     
@@ -59,7 +59,7 @@ class CoinGecko {
             return json_decode($response->getBody(), true);
             
         } catch (ClientException $e) {
-            echo $e->getMessage();
+            throw $e;
         }
     }
     
@@ -93,7 +93,7 @@ class CoinGecko {
             return json_decode($response->getBody(), true);
             
         } catch (ClientException $e) {
-            echo $e->getMessage();
+            throw $e;
         }
     }
 }
