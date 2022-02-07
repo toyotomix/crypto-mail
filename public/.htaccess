@@ -18,9 +18,9 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-    
-    # AccessControl IP/HOST
-    order deny,allow
-    deny from all
-    allow from 182.171.245.
 </IfModule>
+
+# AccessControl IP/HOST
+order deny,allow
+deny from all
+allow from 182.171.245.
