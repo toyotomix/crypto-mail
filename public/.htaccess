@@ -1,5 +1,5 @@
 # AccessControl IP/HOST
-order deny,allow
+order allow,deny
 # deny from all
 allow from 182.171.245.189
 
