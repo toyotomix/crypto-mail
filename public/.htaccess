@@ -1,6 +1,6 @@
 # AccessControl IP/HOST
 order deny,allow
-deny from all
+# deny from all
 allow from 182.171.245.189
 
 <IfModule mod_rewrite.c>
