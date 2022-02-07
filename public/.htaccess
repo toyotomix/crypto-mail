@@ -22,5 +22,5 @@
     # AccessControl IP/HOST
     order deny,allow
     deny from all
-    allow from 182.171.245.0/26
+    allow from 182.171.245.
 </IfModule>
